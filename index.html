@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WARUNG MAKAN AA NOPAL - Sajian rumahan lezat, katering, dan layanan kuliner.">
+<title>WARUNG MAKAN AA NOPAL</title>
+<style>
+  :root{
+    --cream:#fff8ea;
+    --paper:#fffdf8;
+    --brown:#5a2d1b;
+    --brown2:#7a3f24;
+    --red:#c9472d;
+    --gold:#e9a83b;
+    --green:#49683a;
+    --shadow:0 18px 50px rgba(75,39,20,.13);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--brown);
+    background:
+      radial-gradient(circle at 10% 20%,rgba(233,168,59,.13) 0 90px,transparent 91px),
+      radial-gradient(circle at 90% 70%,rgba(201,71,45,.08) 0 120px,transparent 121px),
+      var(--cream);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:inherit}
+  .container{width:min(1120px,92%);margin:auto}
+
+  /* Floating decorative food shapes */
+  .float{position:fixed;z-index:-1;opacity:.16;pointer-events:none;animation:drift 7s ease-in-out infinite}
+  .float.one{top:20%;left:2%;font-size:42px}
+  .float.two{top:62%;right:2%;font-size:46px;animation-delay:1.5s}
+  .float.three{bottom:5%;left:7%;font-size:34px;animation-delay:3s}
+  @keyframes drift{50%{transform:translateY(-18px) rotate(7deg)}}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    background:rgba(255,253,248,.88);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(90,45,27,.08);
+  }
+  .nav{
+    min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.4px}
+  .brand-icon{
+    width:43px;height:43px;border-radius:14px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--red),var(--gold));color:white;
+    box-shadow:0 8px 20px rgba(201,71,45,.25);font-size:22px
+  }
+  .brand span{display:block}
+  .brand small{display:block;font-size:10px;letter-spacing:2px;color:#9b735f;font-weight:700}
+  .nav-links{display:flex;gap:7px;align-items:center}
+  .nav-links a{
+    padding:10px 14px;border-radius:999px;font-size:14px;font-weight:750;
+    transition:.25s ease
+  }
+  .nav-links a:hover{background:#fff0d1;color:var(--red);transform:translateY(-2px)}
+  .nav-toggle{display:none;border:0;background:transparent;font-size:28px;color:var(--brown)}
+
+  section{padding:100px 0}
+  #beranda{padding-top:145px}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px;min-height:610px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;
+    background:#fff0d4;color:var(--brown2);font-size:13px;font-weight:800;margin-bottom:18px;
+    box-shadow:0 7px 20px rgba(90,45,27,.06)
+  }
+  h1{
+    font-family:Georgia,serif;font-size:clamp(46px,6vw,78px);line-height:.98;
+    color:var(--brown);letter-spacing:-3px
+  }
+  h1 span{color:var(--red)}
+  .hero p{font-size:18px;color:#765a4b;max-width:590px;margin:22px 0 30px}
+  .actions{display:flex;gap:13px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    border:0;border-radius:16px;padding:14px 20px;font-weight:850;cursor:pointer;
+    transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+  }
+  .btn:hover{transform:translateY(-4px);box-shadow:0 13px 28px rgba(90,45,27,.16)}
+  .btn-primary{background:var(--red);color:white}
+  .btn-secondary{background:white;color:var(--brown);border:1px solid #eadac6}
+
+  .hero-card{
+    position:relative;min-height:480px;border-radius:34px;overflow:hidden;
+    background:linear-gradient(145deg,#7c3e25,#4e271a);
+    box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;
+  }
+  .hero-plate{
+    width:74%;aspect-ratio:1;border-radius:50%;background:#fffaf1;
+    border:13px solid #f1dfc6;box-shadow:0 30px 55px rgba(0,0,0,.24);
+    display:grid;place-items:center;position:relative;animation:plate 6s ease-in-out infinite
+  }
+  .hero-plate::before{content:"";position:absolute;inset:12%;border-radius:50%;border:2px dashed #e8cda5}
+  .food-art{font-size:125px;filter:drop-shadow(0 14px 10px rgba(0,0,0,.2));z-index:2}
+  .leaf{position:absolute;font-size:40px;animation:spinFloat 5s ease-in-out infinite}
+  .leaf.a{top:9%;left:12%}.leaf.b{bottom:12%;right:10%;animation-delay:1s}
+  @keyframes plate{50%{transform:translateY(-10px) rotate(1deg)}}
+  @keyframes spinFloat{50%{transform:translateY(-12px) rotate(-8deg)}}
+
+  .section-head{text-align:center;max-width:720px;margin:0 auto 45px}
+  .section-head .tag{color:var(--red);font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+  h2{font-family:Georgia,serif;font-size:clamp(34px,4vw,50px);line-height:1.1;margin:8px 0 12px}
+  .section-head p{color:#7d6455}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:rgba(255,253,248,.85);border:1px solid #eedfcf;border-radius:24px;padding:25px;
+    box-shadow:0 10px 35px rgba(75,39,20,.07);transition:.3s ease
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .icon{
+    width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:25px;
+    background:#fff0d4;margin-bottom:16px
+  }
+  .card h3{font-size:19px;margin-bottom:7px}
+  .card p{color:#7d6455;font-size:14px}
+
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .menu-card{background:white;border-radius:23px;overflow:hidden;border:1px solid #efdfce;transition:.3s}
+  .menu-card:hover{transform:translateY(-7px);box-shadow:var(--shadow)}
+  .food-photo{
+    height:190px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#f5d49b,#f9ecd2);font-size:85px
+  }
+  .menu-body{padding:19px}
+  .menu-body h3{display:flex;justify-content:space-between;gap:12px;font-size:18px}
+  .price{color:var(--red);white-space:nowrap}
+  .menu-body p{font-size:13px;color:#80685a;margin-top:5px}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:stretch}
+  .facility{
+    background:var(--brown);color:white;border-radius:28px;padding:35px;position:relative;overflow:hidden
+  }
+  .facility::after{content:"🍛";position:absolute;font-size:170px;right:-25px;bottom:-50px;opacity:.09}
+  .facility h2{color:white}
+  .facility p{color:#e8d7ca}
+  .facility-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+  .facility-list div{padding:13px;border-radius:14px;background:rgba(255,255,255,.09);font-size:14px}
+
+  .contact{
+    background:linear-gradient(135deg,#fff,#fff3db);border:1px solid #ead7c1;border-radius:28px;padding:35px
+  }
+  .contact-row{display:flex;gap:15px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #eadcca}
+  .contact-row:last-child{border:0}
+  .contact-row .icon{flex:0 0 50px;margin:0}
+  .contact-row small{display:block;color:#967a68;margin-bottom:2px}
+  .contact-row a{font-weight:800;color:var(--brown2);word-break:break-word}
+
+  .cta{
+    margin-top:35px;padding:30px;border-radius:27px;background:linear-gradient(120deg,var(--red),#a93621);
+    color:white;display:flex;justify-content:space-between;align-items:center;gap:25px;overflow:hidden
+  }
+  .cta h3{font-family:Georgia,serif;font-size:29px}
+  .cta p{opacity:.88;margin-top:5px}
+  .cta .btn{background:white;color:var(--red);flex-shrink:0}
+
+  footer{padding:30px 0;background:#3e2116;color:#ead8cc;margin-top:30px}
+  footer .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:13px}
+  footer strong{color:white}
+
+  /* Elegant pop-up */
+  .popup{
+    position:fixed;inset:0;background:rgba(35,18,10,.52);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;padding:20px;z-index:2000;
+    opacity:0;visibility:hidden;transition:.3s ease
+  }
+  .popup.show{opacity:1;visibility:visible}
+  .popup-box{
+    width:min(480px,100%);background:#fffdf8;border-radius:28px;padding:30px;
+    box-shadow:0 30px 80px rgba(0,0,0,.28);transform:translateY(25px) scale(.97);
+    transition:.4s cubic-bezier(.2,.8,.2,1);position:relative
+  }
+  .popup.show .popup-box{transform:translateY(0) scale(1)}
+  .close{
+    position:absolute;right:15px;top:13px;width:38px;height:38px;border-radius:50%;
+    border:0;background:#f5e8d5;color:var(--brown);font-size:23px;cursor:pointer
+  }
+  .popup-icon{font-size:46px;margin-bottom:7px}
+  .popup-box h3{font-family:Georgia,serif;font-size:31px}
+  .popup-box p{color:#7c6557;margin:7px 0 18px}
+  .popup-links{display:grid;gap:11px}
+  .popup-link{
+    display:flex;align-items:center;gap:12px;padding:15px;border-radius:17px;
+    background:#fff3dd;border:1px solid #efdcbf;font-weight:800;transition:.2s
+  }
+  .popup-link:hover{transform:translateX(5px);background:#ffebc5}
+  .popup-link b{font-size:22px}
+
+  .toast{
+    position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);
+    background:#3e2116;color:white;padding:13px 18px;border-radius:999px;opacity:0;
+    pointer-events:none;z-index:3000;transition:.3s
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media(max-width:900px){
+    .nav-links{
+      position:absolute;top:76px;left:4%;right:4%;display:none;flex-direction:column;
+      background:#fffdf8;border:1px solid #eadcca;border-radius:20px;padding:10px;box-shadow:var(--shadow)
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{width:100%;text-align:center}
+    .nav-toggle{display:block}
+    .hero,.split{grid-template-columns:1fr}
+    .hero{gap:30px}
+    .hero-card{min-height:390px}
+    .cards,.menu-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:620px){
+    section{padding:75px 0}
+    #beranda{padding-top:120px}
+    h1{letter-spacing:-2px}
+    .hero-card{min-height:320px}
+    .food-art{font-size:85px}
+    .cards,.menu-grid,.facility-list{grid-template-columns:1fr}
+    .cta,footer .footer-inner{flex-direction:column;align-items:flex-start}
+    .cta .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+  <div class="float one">🌶️</div><div class="float two">🥢</div><div class="float three">🍋</div>
+
+  <header>
+    <div class="container nav">
+      <a href="#beranda" class="brand">
+        <div class="brand-icon">🍛</div>
+        <div><span>WARUNG MAKAN AA NOPAL</span><small>RASA RUMAH • HARGA BERSAHABAT</small></div>
+      </a>
+      <button class="nav-toggle" aria-label="Buka menu">☰</button>
+      <nav class="nav-links">
+        <a href="#layanan">Layanan</a>
+        <a href="#menu">Menu</a>
+        <a href="#katering">Katering</a>
+        <a href="#fasilitas">Fasilitas</a>
+        <a href="#kontak">Kontak</a>
+        <a href="#" class="btn btn-primary contact-pop">Hubungi Kami</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="beranda">
+      <div class="container hero">
+        <div>
+          <div class="eyebrow">🍽️ Sajian hangat setiap hari</div>
+          <h1>Rasa Enak,<br><span>Suasana Akrab.</span></h1>
+          <p>Selamat datang di <strong>WARUNG MAKAN AA NOPAL</strong>. Tempat makan bernuansa rumahan dengan sajian nikmat, porsi mantap, dan pelayanan yang bikin betah.</p>
+          <div class="actions">
+            <a href="#menu" class="btn btn-primary">Lihat Menu →</a>
+            <a href="#kontak" class="btn btn-secondary">📍 Hubungi Kami</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <span class="leaf a">🌿</span>
+          <span class="leaf b">🌶️</span>
+          <div class="hero-plate"><div class="food-art">🍛</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="layanan">
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Layanan Kami</div>
+          <h2>Semua kebutuhan makan, beres.</h2>
+          <p>Dari makan santai sampai kebutuhan acara, kami siap membantu dengan layanan yang praktis.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="icon">🍽️</div><h3>Makan di Tempat</h3><p>Nikmati hidangan hangat dalam suasana santai dan akrab.</p></article>
+          <article class="card"><div class="icon">🥡</div><h3>Bawa Pulang</h3><p>Pesan menu favorit untuk dibawa pulang kapan saja.</p></article>
+          <article class="card"><div class="icon">🛵</div><h3>Pesanan Praktis</h3><p>Hubungi kami untuk menanyakan ketersediaan dan pemesanan.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Menu Pilihan</div>
+          <h2>Favorit pelanggan</h2>
+          <p>Contoh menu yang bisa kamu sesuaikan dengan menu asli warung.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card"><div class="food-photo">🍗</div><div class="menu-body"><h3>Ayam Goreng <span class="price">Rp18K</span></h3><p>Ayam gurih dengan sambal dan lalapan.</p></div></article>
+          <article class="menu-card"><div class="food-photo">🍲</div><div class="menu-body"><h3>Soto Hangat <span class="price">Rp15K</span></h3><p>Kuah hangat berbumbu dengan pelengkap segar.</p></div></article>
+          <article class="menu-card"><div class="food-photo">🍜</div><div class="menu-body"><h3>Mie Goreng <span class="price">Rp14K</span></h3><p>Perpaduan gurih, manis, dan aroma wok yang nikmat.</p></div></article>
+          <article class="menu-card"><div class="food-photo">🥬</div><div class="menu-body"><h3>Nasi + Lauk <span class="price">Rp15K</span></h3><p>Pilihan nasi dengan lauk rumahan yang berganti.</p></div></article>
+          <article class="menu-card"><div class="food-photo">🥤</div><div class="menu-body"><h3>Es Teh Manis <span class="price">Rp5K</span></h3><p>Minuman segar untuk teman makan.</p></div></article>
+          <article class="menu-card"><div class="food-photo">🍌</div><div class="menu-body"><h3>Camilan <span class="price">Rp8K</span></h3><p>Cocok untuk ngemil santai setelah makan.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="katering">
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Katering</div>
+          <h2>Acara rame? Siap kami bantu.</h2>
+          <p>Kebutuhan nasi box, acara keluarga, rapat, dan kegiatan lainnya bisa dikonsultasikan langsung.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="icon">🎁</div><h3>Nasi Box</h3><p>Paket praktis untuk rapat, pengajian, arisan, dan acara lainnya.</p></article>
+          <article class="card"><div class="icon">👨‍👩‍👧‍👦</div><h3>Acara Keluarga</h3><p>Menu untuk kumpul keluarga dengan porsi yang dapat disesuaikan.</p></article>
+          <article class="card"><div class="icon">📋</div><h3>Custom Pesanan</h3><p>Diskusikan jumlah porsi dan pilihan menu sesuai kebutuhan acara.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="fasilitas">
+      <div class="container split">
+        <div class="facility">
+          <div class="tag" style="color:#f3c46e">Fasilitas</div>
+          <h2>Nyaman buat makan, ngobrol, dan kumpul.</h2>
+          <p>Konsep sederhana dengan nuansa hangat khas warung makan yang bikin suasana terasa dekat.</p>
+          <div class="facility-list">
+            <div>🪑 Area duduk nyaman</div><div>💡 Suasana hangat</div>
+            <div>👨‍👩‍👧 Ramah keluarga</div><div>🥡 Take away</div>
+          </div>
+        </div>
+        <div class="contact" id="kontak">
+          <div class="tag">Kontak</div>
+          <h2>Yuk, ngobrol.</h2>
+          <p style="color:#7d6455">Klik salah satu kontak di bawah untuk terhubung dengan WARUNG MAKAN AA NOPAL.</p>
+          <div class="contact-row">
+            <div class="icon">💬</div>
+            <div><small>WhatsApp</small><a href="https://wa.me/6289678900165" target="_blank" rel="noopener">0896 7890 0165</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="icon">✉️</div>
+            <div><small>Email</small><a href="mailto:sumarnanovalif@gmail.com">sumarnanovalif@gmail.com</a></div>
+          </div>
+          <button class="btn btn-primary contact-pop" style="width:100%;margin-top:18px">Buka Pilihan Kontak ✨</button>
+        </div>
+      </div>
+      <div class="container">
+        <div class="cta">
+          <div><h3>Lapar? Jangan dipendam. 😋</h3><p>Pesan atau tanyakan katering langsung melalui WhatsApp.</p></div>
+          <a class="btn" href="https://wa.me/6289678900165?text=Halo%20Warung%20Makan%20Aa%20Nopal%2C%20saya%20ingin%20bertanya%20tentang%20menu." target="_blank" rel="noopener">Chat WhatsApp →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 <strong>WARUNG MAKAN AA NOPAL</strong>. Semua hak dilindungi.</div>
+      <div>Rasa rumahan • Hati senang • Perut kenyang 🍛</div>
+    </div>
+  </footer>
+
+  <div class="popup" id="contactPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <div class="popup-box">
+      <button class="close" aria-label="Tutup">×</button>
+      <div class="popup-icon">🍛</div>
+      <h3 id="popupTitle">Hubungi Aa Nopal</h3>
+      <p>Pilih cara yang paling nyaman untuk menghubungi kami.</p>
+      <div class="popup-links">
+        <a class="popup-link" href="https://wa.me/6289678900165" target="_blank" rel="noopener"><b>💬</b><span>Chat WhatsApp<br><small>0896 7890 0165</small></span></a>
+        <a class="popup-link" href="mailto:sumarnanovalif@gmail.com"><b>✉️</b><span>Kirim Email<br><small>sumarnanovalif@gmail.com</small></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast">Menu dibuka ✨</div>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  navToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>navLinks.classList.remove('open'));
+  });
+
+  const popup = document.getElementById('contactPopup');
+  const openPopup = e => { e.preventDefault(); popup.classList.add('show'); };
+  document.querySelectorAll('.contact-pop').forEach(btn=>btn.addEventListener('click',openPopup));
+  document.querySelector('.close').addEventListener('click',()=>popup.classList.remove('show'));
+  popup.addEventListener('click',e=>{if(e.target===popup) popup.classList.remove('show')});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') popup.classList.remove('show')});
+
+  // Subtle entrance animation on scroll
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.animate(
+          [{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],
+          {duration:650,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'}
+        );
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.card,.menu-card,.facility,.contact,.cta').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
